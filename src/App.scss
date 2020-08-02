@@ -1,0 +1,86 @@
+$cardLength: 300px;
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+body{
+	font-size: 1.2em;
+}
+.main-container{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+}
+
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none; /* Safari */
+	   -khtml-user-select: none; /* Konqueror HTML */
+		 -moz-user-select: none; /* Old versions of Firefox */
+		  -ms-user-select: none; /* Internet Explorer/Edge */
+			  user-select: none; /* Non-prefixed version, currently
+									supported by Chrome, Edge, Opera and Firefox */
+}
+
+.clickthrough{
+	pointer-events: none;
+}
+/* Dash Scren */
+
+.dash-screen{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	/*background-image: url('/bg.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size:cover;*/
+	background-color: #c5a027;
+
+	.card-container{
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+
+		.add-card{
+			height: 200px;
+			width: $cardLength;
+			background-color: white;
+			border-radius: 10px;
+			i,p{
+				display: none;
+			}
+		}
+		
+		.idle{
+			width: $cardLength;
+			height: 40px;
+			cursor: pointer;
+			color: white;
+			background-color: rgba(56, 56, 56, 0.4);
+			margin: 5px 10px 0 10px;
+			border-radius: 5px;
+
+			.material-icons{
+				font-size: 2em;
+				position: relative;
+				top: 2px;
+				left: 12px;
+			}
+
+			p{
+				margin: auto;
+				position: relative;
+				display: inline;
+				top: -10px;
+				left: 15px;
+			}
+
+			input{
+				display:none;
+			}
+		}
+	}
+}
