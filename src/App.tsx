@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import DashScreen from './Components/DashScreen';
-import './App.css';
+import './App.scss';
 
 export default class App extends Component {
 	

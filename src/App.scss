@@ -45,12 +45,70 @@ body{
 		justify-content: flex-start;
 
 		.add-card{
-			height: 200px;
+			height: 90px;
 			width: $cardLength;
 			background-color: white;
-			border-radius: 10px;
-			i,p{
+			border-radius: 5px;
+			margin: 5px 10px 0 10px;
+			transition: height 0.2s ease;
+			overflow: hidden;
+			
+
+			.material-icons,p{
 				display: none;
+			}
+
+			input{
+				position: relative;
+				width: 94%;
+				line-height: 2em;
+				top: 5px;
+				left: 5px;
+				outline: none;
+				border: 2px solid #1c6dd8;
+				border-radius: 3px;
+			}
+
+			button {
+				cursor: pointer;
+				border: none;
+				color: white;
+				padding: 8px 15px;
+				margin: 15px 0 0 10px;
+				border-radius:  5px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				transition: background-color 0.2s ease;
+			}
+
+			button.green{
+				background-color: #4CAF50;
+			}
+
+			button:hover.green{
+				background-color: #56c55a;
+			}
+
+			button:active.green {
+				background-color: #3c813d;
+			}
+
+			button.red{
+				background-color: #dd3434;
+			}
+
+			button:hover.red{
+				background-color: #ff3a3a;
+			}
+
+			button:active.red {
+				background-color: #ca3636;
+			}
+
+			button:focus {
+				outline: none;
 			}
 		}
 		
@@ -60,26 +118,23 @@ body{
 			cursor: pointer;
 			color: white;
 			background-color: rgba(56, 56, 56, 0.4);
-			margin: 5px 10px 0 10px;
 			border-radius: 5px;
+			overflow: hidden;
 
 			.material-icons{
 				font-size: 2em;
+				display: inline;
 				position: relative;
-				top: 2px;
-				left: 12px;
+				top: 0px;
+				left: 0;
 			}
 
 			p{
 				margin: auto;
 				position: relative;
 				display: inline;
-				top: -10px;
-				left: 15px;
-			}
-
-			input{
-				display:none;
+				top: -12px;
+				left: 10px;
 			}
 		}
 	}
