@@ -1,8 +1,14 @@
 $cardLength: 300px;
+$cardMargin: 5px 10px 0 10px;
+$fontFamily:  Arial, Helvetica, sans-serif;
+$inputBorder: 2px solid #1c6dd8;
+$hoverColor: #e0e0e0;
+$cardBackgroundColor: #ebecf0;
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 body{
 	font-size: 1.2em;
+	font-family: $fontFamily
 }
 .main-container{
 	position: absolute;
@@ -44,13 +50,152 @@ body{
 		flex-wrap: nowrap;
 		justify-content: flex-start;
 
+		.board{
+			height: auto;
+			width: calc($cardLength + 20);
+			margin: $cardMargin;
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: flex-start;
+
+			.card{
+				width: $cardLength;
+				background-color: $cardBackgroundColor;
+				height: auto;
+				position: relative;
+				border-radius: 4px;
+				overflow: auto;
+
+				.card-textarea{
+					background-color: white;
+					font-size: 0.8em;
+					margin-left: 15px;
+					border-radius: 5px;
+					display: inline-block;
+					max-height: 145px;
+				}
+
+				textarea{
+					display: inline-block;
+					cursor: pointer;
+					overflow: visible;
+					font-family: $fontFamily;
+					resize: none;
+					background-color: transparent;
+					border: $inputBorder;
+					border-color: transparent;
+					margin: 5px 0 0px 5px;
+					font-size: 0.9em;
+					width: 80%;
+				}
+				textarea:focus{
+					outline: none;
+					border: $inputBorder;
+					background-color: white;
+					border-radius: 3px;
+				}
+				a.menu-icon{
+					cursor: pointer;
+					height: 34px;
+					padding: 0 10px 0 10px;
+					position: absolute;
+					font-size: 1.2em;
+					top: 3px;
+					right: 5px;
+				}
+				a.add-item-icon{
+					display: block;
+					cursor: pointer;
+					width: 80%;
+					margin: 5px 0 5px 5px;
+					padding: 5px 0 5px 5px;
+					font-size: 0.9em;
+				}
+				a:hover{
+					background-color: $hoverColor;
+					border-radius: 5px;
+				}
+				.card{
+					width: 90%;
+					margin-left: 5%;
+					background-color: white;
+
+				}
+				.card-item{
+					background-color: white;
+					padding: 5px 0 0 0;
+					border-radius: 5px;
+					box-shadow: 1px 2px 5px #bcc0cc;
+					height: auto;
+					width: 90%;
+					margin-left: 5%;
+					margin-bottom: 10px;
+
+					.card-label{
+						margin-top: 5px;
+						margin-left: 5px;
+						width: 50px;
+						height: 10px;
+						border-radius: 10px;
+					}
+					p{
+						position: relative;
+						display: inline;
+						margin-left: 5px;
+						top:5px;
+					}
+					.due{
+						color: #8f8f8f;
+						margin-top: 5px;
+						padding-bottom: 5px;
+						font-size: 0.8em;
+						p{
+							top: 0px;
+						}
+						i{
+							position: relative;
+							top: 5px;
+							margin-left: 5px;
+							font-size: 1.4em;
+						}
+					}
+
+					.complete{
+						color: white;
+						background-color: #5aac44;
+						border-radius:  0 0 5px 5px;
+					}
+
+					.due-soon{
+						color: white;
+						background-color: #e6c60d;
+						border-radius:  0 0 5px 5px;
+					}
+
+					.over-due{
+						color: white;
+						background-color: #ec9488;
+						border-radius:  0 0 5px 5px;
+					}
+
+					.footer{
+						height: 15px;
+					}
+				}
+				.btn-container{
+					margin-top: -10px;
+					margin-left: 5px;
+				}
+			}
+		}
+
 		.add-card{
 			height: 90px;
 			width: $cardLength;
-			background-color: white;
+			background-color: $cardBackgroundColor;
 			border-radius: 5px;
-			margin: 5px 10px 0 10px;
-			transition: height 0.2s ease;
+			margin: $cardMargin;
+			transition: height 0.2s ease, background-color 0.14s ease;
 			overflow: hidden;
 			
 
@@ -65,50 +210,8 @@ body{
 				top: 5px;
 				left: 5px;
 				outline: none;
-				border: 2px solid #1c6dd8;
+				border: $inputBorder;
 				border-radius: 3px;
-			}
-
-			button {
-				cursor: pointer;
-				border: none;
-				color: white;
-				padding: 8px 15px;
-				margin: 15px 0 0 10px;
-				border-radius:  5px;
-				text-align: center;
-				text-decoration: none;
-				display: inline-block;
-				font-size: 16px;
-				transition: background-color 0.2s ease;
-			}
-
-			button.green{
-				background-color: #4CAF50;
-			}
-
-			button:hover.green{
-				background-color: #56c55a;
-			}
-
-			button:active.green {
-				background-color: #3c813d;
-			}
-
-			button.red{
-				background-color: #dd3434;
-			}
-
-			button:hover.red{
-				background-color: #ff3a3a;
-			}
-
-			button:active.red {
-				background-color: #ca3636;
-			}
-
-			button:focus {
-				outline: none;
 			}
 		}
 		
@@ -136,6 +239,52 @@ body{
 				top: -12px;
 				left: 10px;
 			}
+
+			input{
+				display: none;
+			}
 		}
 	}
+}
+
+.menu-button {
+	cursor: pointer;
+	border: none;
+	color: white;
+	padding: 8px 15px;
+	margin: 15px 0 10px 10px;
+	border-radius:  5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	transition: background-color 0.2s ease;
+}
+
+.menu-button.green{
+	background-color: #4CAF50;
+}
+
+.menu-button:hover.green{
+	background-color: #56c55a;
+}
+
+.menu-button:active.green {
+	background-color: #3c813d;
+}
+
+.menu-button.red{
+	background-color: #dd3434;
+}
+
+.menu-button:hover.red{
+	background-color: #ff3a3a;
+}
+
+.menu-button:active.red {
+	background-color: #ca3636;
+}
+
+.menu-button:focus {
+	outline: none;
 }

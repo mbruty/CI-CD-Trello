@@ -66,10 +66,10 @@ export default class AddNewList extends Component<AddListProps, AddListState> {
                 <p className="clickthrough">Add another list</p>
                 <input ref={this.inputRef} placeholder="Enter list title..."/>
                 <div>
-                    <button className="green" onClick={this.submit}>Add List</button>
+                    <button className="menu-button green" onClick={this.submit}>Add List</button>
                     {/* Using a button rather than an icon with onClick to
                     be more compatible with accessibility tools like screen readers.*/}
-                    <button className="red" onClick={this.closeAdd}>Cancel</button>
+                    <button className="menu-button red" onClick={this.closeAdd}>Cancel</button>
                 </div>
             </div>
         )
