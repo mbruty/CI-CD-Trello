@@ -14,6 +14,7 @@ const whitelist = ['http://localhost:5000', 'http://localhost:3000', 'http://bru
 
 const corsOptions = {
     origin: (origin, callback)  => {
+        return callback(null,true);
         if(whitelist.indexOf(origin) !== -1) {
             callback(null,true);
         }

@@ -3,20 +3,28 @@ import { List, Card } from '../Types/List';
 import AddNewList from './AddNewList';
 import ListCard from './ListCard';
 import { reorder } from '../Helper-Functions/ReorderLists'
-import testLists from '../list.json'
-import { json } from 'express';
+import axios from 'axios';
+
 export default class DashScreen extends Component<DashProps, DashState> {
 
     constructor(props: DashProps){
         super(props);
-        let data: Array<List> = JSON.parse(JSON.stringify(testLists));
         this.state = {
-            lists: data,
-            projectName: ''
+            lists: [],
+            projectName: '',
+            fetched: false
         }
 
         this.updateBoards = this.updateBoards.bind(this);
         this.updateList = this.updateList.bind(this); 
+        this.fetchData = this.fetchData.bind(this);
+    }
+
+    async fetchData(){
+        axios.get('http://localhost:5000/board/' + this.props.boardID)
+        .then(response => {
+            this.setState({...this.state, lists: response.data.lists, fetched: true});
+        })
     }
 
     updateBoards(boardName: string){
@@ -36,6 +44,9 @@ export default class DashScreen extends Component<DashProps, DashState> {
         list?.items.push(newItem);
     }
     render() {
+        if(this.props.boardID && !this.state.fetched){
+            this.fetchData();
+        }
         return (
             <div className="dash-screen">
                 <div className="card-container">
@@ -50,10 +61,11 @@ export default class DashScreen extends Component<DashProps, DashState> {
 }
 
 interface DashProps{
-    // TODO Set props
+    boardID: string
 }
 
 interface DashState{
     lists: Array<List>,
-    projectName: string
+    projectName: string,
+    fetched: boolean
 }
