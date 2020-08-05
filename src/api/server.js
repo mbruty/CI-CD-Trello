@@ -3,12 +3,29 @@ require('dotenv').config();
 const Monk = require('monk');
 const yup = require('yup');
 var bodyParser = require('body-parser');
+var cors = require('cors')
 const app = express();
 const db = Monk(process.env.MONGO_CONN);
 const boards = db.get('boards');
 const users = db.get('users');
 
+
+const whitelist = ['http://localhost:5000', 'http://localhost:3000', 'http://bruty.net', 'http://51.195.151.113:5000'];
+
+const corsOptions = {
+    origin: (origin, callback)  => {
+        if(whitelist.indexOf(origin) !== -1) {
+            callback(null,true);
+        }
+        else{
+            callback('Route not allowed');
+        }
+    },
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 app.use(bodyParser.json());
+app.use(cors(corsOptions));
 
 app.get('/board/:id', async (req, res) => {
     let id = req.params.id;
