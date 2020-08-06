@@ -21,6 +21,7 @@ export default class ListBoard extends Component<ListBoardProps, ListBoardState>
     submit(){
         const text = this.titleRef.current.value;
         this.props.updateList(this.props.list.id, text);
+        this.setState({...this.state, showAddModal: false})
     }
 
     closeAdd(){
@@ -58,9 +59,11 @@ export default class ListBoard extends Component<ListBoardProps, ListBoardState>
                 <div className="card">
                     <TextareaAutosize>{this.props.list.name}</TextareaAutosize>
                     <a className="menu-icon noselect">...</a>
-                    {this.props.list.items!.map((item) => (
-                        <Card card={item as CardType}/>
-                    ))}
+                    <div className="container">
+                        {this.props.list.items!.map((item) => (
+                            <Card card={item as CardType}/>
+                        ))}
+                    </div>
                     {this.renderBottom()}
                     <a className="menu-icon noselect">...</a>
                 </div>
