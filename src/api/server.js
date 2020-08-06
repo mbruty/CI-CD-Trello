@@ -10,6 +10,10 @@ const boards = db.get('boards');
 const users = db.get('users');
 
 
+// Schemas
+const BoardSchema = require('./schemas/BoardSchema');
+const ListSchema = require('./schemas/ListSchema');
+// Cors
 const whitelist = ['http://localhost:5000', 'http://localhost:3000', 'http://bruty.net', 'http://51.195.151.113:5000'];
 
 const corsOptions = {
@@ -28,20 +32,63 @@ const corsOptions = {
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
-app.get('/board/:id', async (req, res) => {
+////////////////////////////////////////////////////////////////    
+// CRUD Boards
+////////////////////////////////////////////////////////////////    
+
+// Get a board by id
+app.get('/board/:id', (req, res) => {
     let id = req.params.id;
-    try{
-        const board = await boards.findOne({_id: id});
-        if(!board){
+    // ToDo: validate userID if board is private
+    boards.findOne({_id: id}).then((doc) => {
+        if(!doc){
             return res.status(404);
         }
         else{
-            res.send(board);
+            return res.send(doc);
         }
-    } catch (err) {
-        return res.status(404);
-    }
+
+    }).catch((err) => res.status(404));
 });
+
+// Create a new board
+app.post('/board', async (req, res) => {
+    let board = req.body;
+    let userID = board.userID;
+    delete board["userID"];
+    try{
+        // Ensure that it's valid
+        await BoardSchema.validate(board)
+        // Put it in to the database
+        const response = await boards.insert(board)
+        // Update the user's boards to contain the new board
+        await users.update({"_id": userID}, {$push:{"boards": response._id}})
+        res.status(200);
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
+})
+
+// Create a new list in a board
+app.post('/board/:boardID', async (req, res) => {
+
+})
+
+// Update an element of a board
+// ToDo possibly stream-line by  only updating what's been changed
+app.put('/board/:boardID', async (req, res) => {
+    const boardID = req.body.boardID
+    delete req.body['boardID'];
+    try{
+        await ListSchema.validate(req.body);
+        // Update the list in database
+        await boards.findOneAndUpdate({_id: boardID}, { $set: {lists: req.body.lists}})
+        .then(() => res.status(200))
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
+
+})
 
 app.get('/users/:id', async (req, res) => {
     let id = req.params.id;

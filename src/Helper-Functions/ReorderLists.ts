@@ -1,7 +1,7 @@
-import { List } from '../Types/List';
+import { ListType } from '../Types/List';
 
-export function reorder(array: Array<List>){
-    let newArray: Array<List> = new Array(array.length - 1);
+export function reorder(array: Array<ListType>){
+    let newArray: Array<ListType> = new Array(array.length - 1);
     array.forEach(list => {
         newArray[list.listPosition] = list;
     });

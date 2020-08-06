@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { List, Card } from '../Types/List';
+import { ListType, CardType } from '../Types/List';
 import AddNewList from './AddNewList';
-import ListCard from './ListCard';
+import List from './List';
 import { reorder } from '../Helper-Functions/ReorderLists'
 import axios from 'axios';
-
+import { updateBoard } from '../Fetch-Functions/UpdateBoards'
 export default class DashScreen extends Component<DashProps, DashState> {
 
     constructor(props: DashProps){
@@ -12,7 +12,8 @@ export default class DashScreen extends Component<DashProps, DashState> {
         this.state = {
             lists: [],
             projectName: '',
-            fetched: false
+            fetched: false,
+            boardID: this.props.boardID
         }
 
         this.updateBoards = this.updateBoards.bind(this);
@@ -28,20 +29,28 @@ export default class DashScreen extends Component<DashProps, DashState> {
     }
 
     updateBoards(boardName: string){
-        let listCopy: Array<List> = this.state.lists;
-        listCopy.push({id: 0, name: boardName, listPosition: listCopy.length, items: []});
+        let listCopy: Array<ListType> = this.state.lists;
+        listCopy.push({id: this.state.lists.length, name: boardName, listPosition: listCopy.length, items: []});
+        console.log(listCopy);
         this.setState({...this.state, lists: reorder(listCopy)});
     }
 
-    updateList(id: number, name: string){
-        //Find the list in current state
-        const list = this.state.lists.find(l => l.id === id);
-        const newItem : Card = {
-            name: name,
-            complete: false,
-            itemPosition: list!.items.length
-        }
-        list?.items.push(newItem);
+    async updateList(id: number, name: string){
+        let listCopy: Array<ListType> = [...this.state.lists]
+        listCopy.forEach(element => {
+            if(element.id === id){
+                const newItem : CardType = {
+                    name: name,
+                    complete: false,
+                    itemPosition: element.items.length
+                }
+                element.items.push(newItem);
+            }
+        });
+        this.setState({...this.state, lists: listCopy});
+        // // Update the database with the new item in the list
+        await updateBoard(this.props.boardID, listCopy).then( r => console.log("r"))
+        .catch(err => console.log(err))
     }
     render() {
         if(this.props.boardID && !this.state.fetched){
@@ -51,7 +60,7 @@ export default class DashScreen extends Component<DashProps, DashState> {
             <div className="dash-screen">
                 <div className="card-container">
                     {this.state.lists.map(list => (
-                        <ListCard updateList={this.updateList} list={list}/>
+                        <List updateList={this.updateList} list={list}/>
                     ))}
                     <AddNewList callback={this.updateBoards}/>
                 </div>
@@ -65,7 +74,8 @@ interface DashProps{
 }
 
 interface DashState{
-    lists: Array<List>,
+    lists: Array<ListType>,
     projectName: string,
-    fetched: boolean
+    fetched: boolean,
+    boardID: string
 }

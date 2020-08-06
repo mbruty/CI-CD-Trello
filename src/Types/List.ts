@@ -1,12 +1,12 @@
-export type List = {
-    id: number,
+export type ListType = {
+    id: number;
     name: string;
     listPosition: number;
-    items: Array<Card>;
+    items: Array<CardType>;
 
 }
 
-export type Card = {
+export type CardType = {
     name: string;
     //Label will be a hex string
     label?: string;

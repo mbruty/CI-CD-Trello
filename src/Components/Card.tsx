@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card } from '../Types/List'
+import { CardType } from '../Types/List'
 
 export default class CardItem extends Component<CardProps, CardState> {
     render() {
@@ -44,7 +44,7 @@ function renderDate(complete: boolean, dueDate?: string){
 }
 
 interface CardProps {
-    card: Card
+    card: CardType
 }
 
 interface CardState {

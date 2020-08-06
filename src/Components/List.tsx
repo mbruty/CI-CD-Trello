@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { List, Card } from '../Types/List';
+import { ListType, CardType } from '../Types/List';
 import TextareaAutosize from 'react-textarea-autosize';
-import CardItem from './CardItem';
+import Card from './Card';
 
 export default class ListBoard extends Component<ListBoardProps, ListBoardState> {
 
@@ -21,7 +21,6 @@ export default class ListBoard extends Component<ListBoardProps, ListBoardState>
     submit(){
         const text = this.titleRef.current.value;
         this.props.updateList(this.props.list.id, text);
-        this.setState({...this.state, showAddModal: false});
     }
 
     closeAdd(){
@@ -60,7 +59,7 @@ export default class ListBoard extends Component<ListBoardProps, ListBoardState>
                     <TextareaAutosize>{this.props.list.name}</TextareaAutosize>
                     <a className="menu-icon noselect">...</a>
                     {this.props.list.items!.map((item) => (
-                        <CardItem card={item as Card}/>
+                        <Card card={item as CardType}/>
                     ))}
                     {this.renderBottom()}
                     <a className="menu-icon noselect">...</a>
@@ -71,7 +70,7 @@ export default class ListBoard extends Component<ListBoardProps, ListBoardState>
 }
 
 interface ListBoardProps {
-    list: List,
+    list: ListType,
     updateList(id: number, text: string): void
 }
 
