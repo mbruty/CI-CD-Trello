@@ -69,11 +69,6 @@ app.post('/board', async (req, res) => {
     }
 })
 
-// Create a new list in a board
-app.post('/board/:boardID', async (req, res) => {
-
-})
-
 // Update an element of a board
 // ToDo possibly stream-line by  only updating what's been changed
 app.put('/board/:boardID', async (req, res) => {
