@@ -31,11 +31,12 @@ export default class DashScreen extends Component<DashProps, DashState> {
     updateBoards(boardName: string){
         let listCopy: Array<ListType> = this.state.lists;
         listCopy.push({id: this.state.lists.length, name: boardName, listPosition: listCopy.length, items: []});
-        console.log(listCopy);
+        updateBoard(this.props.boardID, listCopy).then( r => console.log("r"))
+        .catch(err => console.log(err))
         this.setState({...this.state, lists: reorder(listCopy)});
     }
 
-    async updateList(id: number, name: string){
+    updateList(id: number, name: string){
         let listCopy: Array<ListType> = [...this.state.lists]
         listCopy.forEach(element => {
             if(element.id === id){
@@ -49,7 +50,7 @@ export default class DashScreen extends Component<DashProps, DashState> {
         });
         this.setState({...this.state, lists: listCopy});
         // // Update the database with the new item in the list
-        await updateBoard(this.props.boardID, listCopy).then( r => console.log("r"))
+        updateBoard(this.props.boardID, listCopy).then( r => console.log("r"))
         .catch(err => console.log(err))
     }
     render() {
