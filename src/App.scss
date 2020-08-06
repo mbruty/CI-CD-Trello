@@ -64,7 +64,12 @@ body{
 				height: auto;
 				position: relative;
 				border-radius: 4px;
-				overflow: auto;
+
+				.container{
+					height: auto;
+					max-height: 90vh;
+					overflow: auto;
+				}
 
 				.card-textarea{
 					background-color: white;
@@ -114,12 +119,6 @@ body{
 				a:hover{
 					background-color: $hoverColor;
 					border-radius: 5px;
-				}
-				.card{
-					width: 90%;
-					margin-left: 5%;
-					background-color: white;
-
 				}
 				.card-item{
 					background-color: white;
