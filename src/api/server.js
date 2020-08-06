@@ -51,6 +51,19 @@ app.get('/board/:id', (req, res) => {
     }).catch((err) => res.status(404));
 });
 
+app.get('/board/:id/max', async (req, res) => {
+    let id = req.params.id;
+    await boards.findOne({_id: id}, "maxCardId")
+    .then((response) => 
+    res
+        .send(response.maxCardId.toString()))
+        .sendStatus(200)
+    .catch((err) => {
+        console.log(err)
+        res.sendStatus(500)
+    });
+})
+
 // Create a new board
 app.post('/board', async (req, res) => {
     let board = req.body;
@@ -77,7 +90,12 @@ app.put('/board/:boardID', async (req, res) => {
     try{
         await ListSchema.validate(req.body);
         // Update the list in database
-        await boards.findOneAndUpdate({_id: boardID}, { $set: {lists: req.body.lists}})
+        await boards.findOneAndUpdate(
+            {_id: boardID},
+            {
+                $set: {lists: req.body.lists},
+                $inc: { maxCardId: 1 }
+            })
         .then(() => res.status(200))
     } catch (err) {
         res.status(400).send(err.message);
