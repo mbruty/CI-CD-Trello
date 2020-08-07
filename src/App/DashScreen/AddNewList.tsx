@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createBoard } from '../Fetch-Functions/UpdateBoards';
+import { createBoard } from '../../shared/UpdateBoards';
 
 export default class AddNewList extends Component<AddListProps, AddListState> {
 

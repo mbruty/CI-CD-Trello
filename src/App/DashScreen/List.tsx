@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { ListType, CardType } from '../Types/List';
+import { ListType, CardType } from '../../shared/List';
 import TextareaAutosize from 'react-textarea-autosize';
-import Card from './Card';
+import Card from './List/Card';
 
 export default class ListBoard extends Component<ListBoardProps, ListBoardState> {
 

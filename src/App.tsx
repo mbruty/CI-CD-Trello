@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import DashScreen from './Components/DashScreen';
-import './App.scss';
+import DashScreen from './App/DashScreen';
+import './index/App.scss';
 import axios from 'axios';
 const userID = '5f2ad210c3c6dfb7fe773212';
 

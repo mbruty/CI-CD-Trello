@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { ListType, CardType } from '../Types/List';
-import AddNewList from './AddNewList';
-import List from './List';
-import { reorder } from '../Helper-Functions/ReorderLists'
+import { ListType, CardType } from '../shared/List';
+import AddNewList from './DashScreen/AddNewList';
+import List from './DashScreen/List';
+import { reorder } from './DashScreen/ReorderLists'
 import axios from 'axios';
-import { updateBoard } from '../Fetch-Functions/UpdateBoards'
-import OptionsModal from '../Modals/OptionsModal'
+import { updateBoard } from '../shared/UpdateBoards'
+import OptionsModal from './DashScreen/OptionsModal'
 
 export default class DashScreen extends Component<DashProps, DashState> {
 

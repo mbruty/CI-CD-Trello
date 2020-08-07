@@ -1,4 +1,4 @@
-import { ListType } from '../Types/List';
+import { ListType } from './List';
 import axios from 'axios';
 export function setBoard(boards: Array<ListType>): Promise<string> {
     return new Promise<string>((resolve, reject) => {

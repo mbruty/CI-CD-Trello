@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { CardType } from '../Types/List'
+import { CardType } from '../../shared/List'
 import TextareaAutosize from 'react-textarea-autosize';
 
 export default class OptionsModal extends Component<OptionsModalProps, OptionsModalState> {

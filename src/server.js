@@ -11,8 +11,8 @@ const users = db.get('users');
 
 
 // Schemas
-const BoardSchema = require('./schemas/BoardSchema');
-const ListSchema = require('./schemas/ListSchema');
+const BoardSchema = require('./server/BoardSchema');
+const ListSchema = require('./server/ListSchema');
 // Cors
 const whitelist = ['http://localhost:5000', 'http://localhost:3000', 'http://bruty.net', 'http://51.195.151.113:5000'];
 
