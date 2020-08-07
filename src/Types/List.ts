@@ -7,9 +7,10 @@ export type ListType = {
 }
 
 export type CardType = {
+    id: number,
     name: string;
     //Label will be a hex string
-    label?: string;
+    label?: Array<number>;
     //Should be a date object, but the request from api will return a string
     due?: string;
     complete: boolean;
