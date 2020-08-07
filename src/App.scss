@@ -43,6 +43,76 @@ body{
 	background-size:cover;*/
 	background-color: #c5a027;
 
+	.options-modal{
+		position: absolute;
+		left: 25vw;
+		background-color: $cardBackgroundColor;
+		top: 10vh;
+		height: 80vh;
+		width: 50vw;
+		background-color: white;
+		z-index: 5;
+		border-radius: 5px;
+		.flex{
+			margin-left: 50px;
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: flex-start;
+
+			.label{
+				position: relative;
+				margin-left: 5px;
+				margin-bottom: 5px;
+				width: 35px;
+				height: 30px;
+				border-radius: 5px;
+			}
+			i{
+				margin: 0;
+				border-radius: 5px;
+				padding: 2px;
+				margin-left: 5px;
+				transform: translateY(-2px);
+			}
+		}
+		i{
+			cursor: pointer;
+			font-size: 1.5em;
+			float: right;
+			margin: 15px 15px 15px 0;
+			color: #444444;
+			padding: 5px;
+			border-radius:25px;
+			transition: color 0.1s ease;
+		}
+		i:hover{
+			background-color: #0000001a;
+		}
+		.remove:hover{
+			color: #df1111;
+		}
+		textarea{
+			margin-left: 50px;
+			margin-top: 25px;
+			border: 2px solid $cardBackgroundColor;
+			border-radius: 3px;
+			resize: none;
+			height: auto;
+			width: 60%;
+			font-family: $fontFamily;
+			font-size: 1.3em;
+			transition: background-color 0.2s ease, border-color 0.2s ease;
+		}
+		textarea:focus{
+			outline: none;
+			border: $inputBorder;
+			background-color: white;
+		}
+		p{
+			margin-left: 50px;
+		}
+	}
+
 	.card-container{
 		width: 100%;
 		height: 100%;
@@ -62,12 +132,13 @@ body{
 				width: $cardLength;
 				background-color: $cardBackgroundColor;
 				height: auto;
+				max-height: 100vh;
 				position: relative;
 				border-radius: 4px;
 
 				.container{
 					height: auto;
-					max-height: 90vh;
+					max-height: 80vh;
 					overflow: auto;
 				}
 
@@ -120,6 +191,40 @@ body{
 					background-color: $hoverColor;
 					border-radius: 5px;
 				}
+				.edit-modal{
+					position: relative;
+					z-index: 5;
+					height: auto;
+					margin-left: 15px;
+					margin-bottom: 15px;
+					width: 260px;
+					background-color: white;
+					border-radius: 5px;
+					
+					.padding{
+						padding: 5px;
+					}
+					.flex{
+						display: flex;
+						flex-flow: row wrap;
+						justify-content: flex-start;
+
+						.card-label{
+							position: relative;
+							margin-left: 5px;
+							margin-bottom: 5px;
+							width: 50px;
+							height: 10px;
+							border-radius: 10px;
+						}
+					}
+					
+				}
+				.card-item:hover{
+					.edit-icon{
+						color: #a5a5a5;
+					}
+				}
 				.card-item{
 					background-color: white;
 					padding: 5px 0 0 0;
@@ -130,12 +235,34 @@ body{
 					margin-left: 5%;
 					margin-bottom: 10px;
 
-					.card-label{
-						margin-top: 5px;
-						margin-left: 5px;
-						width: 50px;
-						height: 10px;
-						border-radius: 10px;
+					.edit-icon{
+						cursor: pointer;
+						float: right;
+						color: white;
+						font-size: 1em;
+						margin-right: 5px;
+						margin-top: -2px;
+						padding: 5px;
+						border-radius: 5px;
+					}
+
+					.edit-icon:hover{
+						background-color: #dadada;
+					}
+
+					.flex{
+						display: flex;
+						flex-flow: row wrap;
+						justify-content: flex-start;
+
+						.card-label{
+							position: relative;
+							margin-left: 5px;
+							margin-bottom: 5px;
+							width: 50px;
+							height: 10px;
+							border-radius: 10px;
+						}
 					}
 					p{
 						position: relative;
@@ -286,4 +413,14 @@ body{
 
 .menu-button:focus {
 	outline: none;
+}
+
+.grey-out{
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	z-index: 2;
+	background-color: rgba(0, 0, 0, 0.514)
 }
