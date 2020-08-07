@@ -48,9 +48,8 @@ export default class ListBoard extends Component<ListBoardProps, ListBoardState>
         }
         else{
             return(                    
-            <div className="add-item">
-                <a className="add-item-icon noselect" onClick={this.showAddItem}>+ Add a new item</a>
-            </div>)
+            <a className="add-item-icon noselect" onClick={this.showAddItem}>+ Add a new item</a>
+            )
         }
     }
     render() {
@@ -61,7 +60,7 @@ export default class ListBoard extends Component<ListBoardProps, ListBoardState>
                     <a className="menu-icon noselect">...</a>
                     <div className="container">
                         {this.props.list.items!.map((item) => (
-                            <Card card={item as CardType}/>
+                            <Card colours={this.props.colours} showOptionsModal={this.props.showOptionsModal} updateCardInList={this.props.updateCardInList} card={item as CardType}/>
                         ))}
                     </div>
                     {this.renderBottom()}
@@ -74,7 +73,10 @@ export default class ListBoard extends Component<ListBoardProps, ListBoardState>
 
 interface ListBoardProps {
     list: ListType,
-    updateList(id: number, text: string): void
+    colours: Array<string>,
+    updateList(id: number, text: string): void,
+    updateCardInList(id: number, newName: string): void,
+    showOptionsModal(card: CardType): void
 }
 
 interface ListBoardState {
