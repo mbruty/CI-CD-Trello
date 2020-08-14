@@ -1,14 +1,12 @@
 const express = require('express');
 require('dotenv').config();
 const Monk = require('monk');
-const yup = require('yup');
 var bodyParser = require('body-parser');
 var cors = require('cors')
 const app = express();
 const db = Monk(process.env.MONGO_CONN);
 const boards = db.get('boards');
 const users = db.get('users');
-
 
 // Schemas
 const BoardSchema = require('./server/BoardSchema');
@@ -34,7 +32,7 @@ app.use(cors(corsOptions));
 
 ////////////////////////////////////////////////////////////////    
 // CRUD Boards
-////////////////////////////////////////////////////////////////    
+///////////////////////////////////////////////////////////////    
 
 // Get a board by id
 app.get('/board/:id', (req, res) => {
@@ -42,13 +40,16 @@ app.get('/board/:id', (req, res) => {
     // ToDo: validate userID if board is private
     boards.findOne({_id: id}).then((doc) => {
         if(!doc){
-            return res.status(404);
+            return res.sendStatus(404);
         }
         else{
             return res.send(doc);
         }
 
-    }).catch((err) => res.status(404));
+    }).catch((err) => {
+        res.status(404)
+        res.send(err)
+    });
 });
 
 app.get('/board/:id/max', async (req, res) => {
@@ -98,6 +99,7 @@ app.put('/board/:boardID', async (req, res) => {
             })
         .then(() => res.status(200))
     } catch (err) {
+        console.log(err);
         res.status(400).send(err.message);
     }
 
