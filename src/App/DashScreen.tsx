@@ -21,7 +21,9 @@ export default class DashScreen extends Component<DashProps, DashState> {
             cardToShow: undefined,
         }
         this.updateBoards = this.updateBoards.bind(this);
+        this.deleteLabel = this.deleteLabel.bind(this);
         this.addItemToList = this.addItemToList.bind(this); 
+        this.setStateAsync = this.setStateAsync.bind(this);
         this.fetchData = this.fetchData.bind(this);
         this.updateCardInList = this.updateCardInList.bind(this);
         this.showOptionsModal = this.showOptionsModal.bind(this);
@@ -87,6 +89,27 @@ export default class DashScreen extends Component<DashProps, DashState> {
             .catch(err => console.log(err))
     }
 
+    setStateAsync(state: DashState){
+        return new Promise((resolve) => {
+            this.setState(state, resolve);
+        })
+    }
+
+    deleteLabel(label: number, id?:number){
+        // Can't use truthy values here as id could be 0
+        if(id === null) return;
+        let listCopy = [...this.state.lists];
+        listCopy.forEach(list => {
+            list.items.forEach(item =>{
+                    
+            })
+        })
+        // Update the state and db with the new state
+        this.setStateAsync({...this.state, lists: listCopy}).then( () => {
+            //updateBoard(this.props.boardID, listCopy)
+        })
+    }
+
     render() {
         if(this.props.boardID && !this.state.fetched){
             this.fetchData();
@@ -99,7 +122,7 @@ export default class DashScreen extends Component<DashProps, DashState> {
                     ))}
                     <AddNewList callback={this.updateBoards}/>
                 </div>
-                {this.state.showOptionsModal ? <OptionsModal colours={this.state.colours} close={this.closeModal} card={this.state.cardToShow}/> : null}
+                {this.state.showOptionsModal ? <OptionsModal delete={this.deleteLabel} colours={this.state.colours} close={this.closeModal} card={this.state.cardToShow}/> : null}
             </div>
         )
     }

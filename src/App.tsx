@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DashScreen from './App/DashScreen';
 import './index/App.scss';
 import axios from 'axios';
+import Nav from './App/Nav';
 const userID = '5f2ad210c3c6dfb7fe773212';
 
 export default class App extends Component <{}, AppState> {
@@ -26,6 +27,7 @@ export default class App extends Component <{}, AppState> {
 	render() {
 		return (
 			<div className="main-container">
+				<Nav updateStatus={"uptodate"}/>
 				<DashScreen boardID={this.state.boards[0]}/>
 			</div>
 		)
