@@ -28,6 +28,50 @@ body{
 									supported by Chrome, Edge, Opera and Firefox */
 }
 
+.nav{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 5;
+	width: 100%;
+	height: 6vh;
+	background-color: rgba(56, 56, 56, 0.199);
+	.status-container{
+		height: calc(6vh - 2px);
+		width: calc(6vh - 2px);
+		background-color: #ffffff83;
+		border: 1px solid #7e7e7e;
+		float: right;
+		margin-right: 5px;
+
+		.in{
+			stroke-dasharray: 1000;
+			animation: dash 3s linear;
+		}
+
+		.out{
+			animation: out 1s linear;
+			color: transparent;
+			.warn {
+				fill: transparent;
+			}
+		}
+
+		svg{
+			height: 100%;
+			width: auto;
+		}
+		#loading{
+			animation-name: spin;
+			animation-duration: 3s;
+			animation-iteration-count:infinite;
+		}
+		.warn{
+			fill: #f7931e;
+		}
+	}
+}
+
 .clickthrough{
 	pointer-events: none;
 }
@@ -36,7 +80,7 @@ body{
 .dash-screen{
 	position: relative;
 	width: 100%;
-	height: 100%;
+	height: 100vh;
 	/*background-image: url('/bg.jpg');
 	background-repeat: no-repeat;
 	background-position: center;
@@ -66,6 +110,8 @@ body{
 				width: 35px;
 				height: 30px;
 				border-radius: 5px;
+				cursor: pointer;
+				box-shadow: 2px 3px 5px #c4c4c4;
 			}
 			i{
 				margin: 0;
@@ -73,6 +119,21 @@ body{
 				padding: 2px;
 				margin-left: 5px;
 				transform: translateY(-2px);
+			}
+			.close{
+				padding:0;
+				width: 35px;
+				height: 30px;
+				text-align: center;
+				margin-left: -20px;
+				margin-right: -10px;
+				transform: translate(30px, 2px);
+				z-index: 1;
+				color: transparent;
+			}
+			.close:hover{
+				color: white;
+				cursor: pointer;
 			}
 		}
 		i{
@@ -114,15 +175,17 @@ body{
 	}
 
 	.card-container{
+		position: relative;
 		width: 100%;
-		height: 100%;
+		height: 94vh;
+		top: 6vh;
 		display: flex;
 		flex-wrap: nowrap;
 		justify-content: flex-start;
 
 		.board{
 			height: auto;
-			width: calc($cardLength + 20);
+			width: calc(#{$cardLength} + 20);
 			margin: $cardMargin;
 			display: flex;
 			flex-flow: column nowrap;
@@ -423,4 +486,25 @@ body{
 	width: 100vw;
 	z-index: 2;
 	background-color: rgba(0, 0, 0, 0.514)
+}
+
+@keyframes spin {
+	0%{
+		transform: rotate(0deg);
+		transform: rotate(-360deg);
+	}
+}
+@keyframes dash {
+	from{
+		color: transparent;
+		stroke-dasharray: 200;
+	}
+	to {
+		color: black;
+		stroke-dasharray: 1000;
+	}
+}
+@keyframes out{
+	from {color: black; }
+	to {color: transparent;}
 }
